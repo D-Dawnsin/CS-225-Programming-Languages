@@ -1,0 +1,43 @@
+(comment 
+
+
+
+Question 1
+How is Clojure lazy? Why is that important?
+
+Question 2
+What does an empty collection act like in a Boolean context?
+Is there a good way to deal with this (if so, how)?
+
+Question 3
+What's the difference between nil and false?
+
+Question 4
+Define a function that takes two arguments and returns the
+    greater of the two.
+
+Question 5
+Give iterative and recursive definitions of a function that
+
+    a. takes a positive integer and prints that many dots.
+
+    b. takes a list and returns the number of times the symbol a 
+       occurs in it.
+
+Question 6 
+Write a function called list­of­nums n that will return a list of numbers (1 2 ... n )
+
+Question 7 
+Write a Clojure function (remove­multiples k nlist) that will remove the multiples of k from a list of numbers nlist. So remove­multiples of 3 from list­of­nums 6 should produce 1 2 4 5.
+
+Question 8
+Write a function 'sieve n' that produces the prime numbers (and 1) up through n.  [Sound familiar?]
+
+Question 9
+Implement Fizzbuzz but instead say "want" for multiples of 2 and "cookie" for multiples of 3 and "MeWantCookie" for multiples of 6.  Comment and Explain exactly which method you chose and why/how it works - in language terms (a reference or two might be a good idea...) for full credit. 
+
+Please submit your code answers as a text file, include Word/libreoffice/etc document with screenshots of output,please.
+
+--Yes, question 9 may be tricky to do well.--
+
+)

@@ -1,0 +1,201 @@
+Lab 4 Clojure
+
+1)
+	Clojure is lazy because sequence elements are produced as a result of computation, or
+	the computation is performed as needed. Therefore, an expression is not evaluated until 
+	its value is needed. 
+
+	This is important for a number of reasons, but the big ones are that one has the baility to
+	define potentially infinite data structures and that the language's performance increases by avoiding 
+	needless calculations and error conditions when evaluating expressions. 
+
+2)
+	An empty collection acts like False in a boolean sense. The best way to deal with this is by
+	calling "seq" on a collection to test whether or not it is empty. You want to use "seq" instead
+	of "empty?" because when seq is called on an empty collection is returns nil since the collection
+	cannot be converted to anything with a first or rest. The reason this is better than "empty?"
+	is because the empty command checks with a double negative and "seq" is directly performed and 
+	gains a miniscule amount of performance over "empty?".
+
+3)
+	The difference between nil and flase is that nil can be false, but false cannot be nil. In
+	other words, nil can conditionally result in a flase, but nil can also represent any 
+	possible value for any data type. False cannot represent any possible value for any data type. 
+
+4)
+	(defn greater-num [x y]
+	(if ( > x y)
+    		(println (format "%d is bigger" x))
+    		(println (format "%d is bigger" y))))
+
+	(greater-num 96 33)
+
+5)
+
+	1. takes a positive integer and prints that many dots
+
+	a. Recursive:
+	(defn recur-dot [num]
+		(loop [i num]
+    			(when (> i 0)
+        			(print ".")
+        			(recur (- i 1)))))  //can even change out the "recur" with "recur-dot"
+
+	(recur-dot 5)
+
+
+	Iterative:
+	(defn iter-dot [num]
+   	(def x 0)
+   	(while (< x num)
+        	(do
+            	(print ".")
+            	(def x (+ x 1)))))
+
+	(iter-dot 7)
+
+
+	2. takes a list and returns the number of times the symbol a 
+       occurs in it.
+
+	a. Iterative
+
+	(defn iter-list [lst]
+    	(def x 0)
+    	(def cnt 0)
+    	(def ls lst)
+    	(while (< x (count lst))
+           (if (= (first ls) 'a)
+               (do
+               (def ls (rest ls))
+               (def x (+ x 1))
+               (def cnt (+ cnt 1)))
+           
+               (do
+               (def ls (rest ls))
+               (def x (+ x 1))
+               (def cnt (+ cnt 0)))))
+    	(println cnt))
+  
+       
+	(def ls (list 'a 'b 'c 'd 'a 'a))
+	(iter-list ls)
+
+
+	b. Recursive
+
+	(defn recur-list [lst OgCnt]
+    	(def cnt OgCnt)
+    	(def ls lst)
+    	(if (= 0 (count lst))
+        	(println cnt)
+        
+        	(if (= (first ls) 'a)
+            		(do
+            		(def cnt (+ OgCnt 1))
+            		(recur (rest ls) cnt))
+           
+            		(do
+            		(def cnt (+ OgCnt 0))
+            		(recur (rest ls) cnt)))))
+
+	(def ls (list 'a 'b 'c 'd 'a 'j))
+	(recur-list ls 0)
+
+
+6)
+
+	(defn list-of-num [num]
+   	(def x 1)
+   	(while (<= x num)
+    	(do
+        	(print x "")
+        	(def x (+ x 1)))))
+     
+	(list-of-num 11)
+
+7)
+
+    (defn remove-multiples [lst num newLst]
+    (def ls lst)
+    (def rtrnLst newLst)
+    (if (= 0 (count lst))
+    	(print rtrnLst)
+    
+    	(if (not= (mod (first ls) num) 0)
+        	(do
+        	    (def rtrnLst (cons (first ls) rtrnLst))
+    		    (recur (rest ls) num rtrnLst))
+      
+    		(do
+    		    (recur (rest ls) num rtrnLst)))))
+
+	(def ls (list 1 5 10 6 95 82))  
+	(remove-multiples ls 5 (list))
+
+
+8)
+
+	(defn sieve [n]
+  	(if (< 1 n)
+    		(empty? (filter #(= 0 (mod n %)) (range 2 n)))
+    		false))  
+          
+	(defn prime-seq [from to]
+  	(print (filter sieve  (range from (inc to)))))
+
+	(prime-seq 2 16)
+	
+
+
+
+
+9)
+
+	(defn fizzbuzz [lst newLst]
+    	(def ls lst)
+    	(def rtrnLst newLst)
+    	(if (= 0 (count lst))
+    		(print rtrnLst)
+    
+    		(if (= (mod (first ls) 6) 0)
+        		(do
+        	    		(def rtrnLst (cons "MeWantCookie" rtrnLst))
+    		    		(recur (rest ls) rtrnLst))
+      
+    			(if (= (mod (first ls) 3) 0)
+    		    		(do
+        	        		(def rtrnLst (cons "cookie" rtrnLst))
+    		        		(recur (rest ls) rtrnLst))
+    		    
+    		    		(if (= (mod (first ls) 2) 0)
+    		        		(do
+        	            			(def rtrnLst (cons "want" rtrnLst))
+    		            			(recur (rest ls) rtrnLst))
+    		        		(do
+    		            			(def rtrnLst (cons (first ls) rtrnLst))
+    		            			(recur (rest ls) rtrnLst)))))))
+    		        
+    		        
+    		
+	(def ls (list 2 3 6 5 19 11))  
+	(fizzbuzz ls (list))
+
+The method I chose for fizzbuzz was to next if statements. The reason for this is because it felt much easier to
+use if statements then to loop. Looping in both clojure and lisp feel strange just because they don't feel as strong 
+as a for loop. Therefore, it was much easier to navigate through this problem by nesting if statements and recuring 
+where the if statements were met. This way the item being looked at in the list would be the next item it found either 
+a multiple of 6, 3, or 2. Furthermore, the way it works is that the function grabs the first item in the list 
+and compares the modulus of it and 6 to 0 and if it is not 0 then it compares it to 3 and then to 2. At any time if 
+the answer is equal to 0 then the function will replace the number with one of the phrases depending on which number
+multiplies into the number from the list and then call the function again with the next item in the list. This 
+recursion keeps happening until we meet the end of the list passed to the function and then it will print the new
+list with all of the phrases in it. The reason why the recursion works is because clojure supports lazy recursion.
+This means that as soon as an if statement if met, the code will do what is necessary and not look further down the 
+if statements. So if the list number is divisible by 6 then it will start recursion there instead of going down
+the if statements and checking if the number is also divisible by 3 and 2. This would only happen if the number was 
+not divisible by 6. In other words the fact that clojure is lazy means it is more efficient in calculating only two
+if statements for the best case senario, rather thn always testing every if statement.      
+	
+
+
