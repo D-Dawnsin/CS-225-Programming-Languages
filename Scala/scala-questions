@@ -1,0 +1,20 @@
+
+1) Explain 'val' in scala.
+
+2) What is a tuple?  Why/how is scala good at them?
+
+3) How do I append to a/the list in Scala?
+
+4) Extend 'count the coins' - http://rosettacode.org/wiki/Count_the_coins - with Scala by allowing for the  the half-dollar coin.  
+
+5)  For the last question, you get to pick:
+Either 
+[a] implement 'words from (phone) numbers'... 
+http://practice.geeksforgeeks.org/problems/possible-words-from-phone-digits/0
+OR
+[b] clean up a phone number... as explained at:
+http://exercism.io/exercises/scala/phone-number/readme
+
+Please try to use "idiomatic" Scala (as in, don't just grab from Java - try to use the features in Scala that, well, make it Scala.  Some commenting would be good too.... to demonstrate you understand what's going on / why it works.
+Internet is OK (rosettacode.com in particular!) but if you find an already done solution [which is fine but you should include a link/etc to it] please add a bit - at least some explanation but maybe even some extras in terms of functionality.
+

@@ -1,0 +1,90 @@
+Scala:
+
+1)
+
+Val is used in Scala whenever one wants to definie a constant, a variable that is immutable. Vals can only be 
+evaluated once and this is done at the time of their definition. When they are called from that point onward, 
+it uses the same values for all references of it.
+
+2)
+
+A tuple is a value that contains a fixed number of elements, each with its own type. Tuples are also immutable.
+Scala is good at tuples because it uses pattern matching. This means that a tuple can be taken apart 
+more easily. This is important because Tuples are not a collection class and do not have methods like 
+filter and map. Therefore, being good at pattern matching allows the container tuple to more easily 
+navigated, sorted, and return values.
+
+3)
+
+To append an item to a list in Scala one has to follow the syntax of 
+
+List(1, 2, 3) :+ 4
+
+val l1 = List("Dawson") :+ "Dog"
+
+or you have to create a new list entirely as if this was a functional programming language
+
+val l1 = List("Dawson")
+val updatedL1 = l1 :+ "Dog"
+
+4)
+
+object HelloWorld {
+   def main(args: Array[String]) {
+         
+      countChange (100, List(1, 5, 10, 25, 50))
+   }
+   
+   
+   
+   
+   
+    def countChange(amount: Int, coins:List[Int]) = 
+    {
+	val ways = Array.fill(amount + 1)(0)
+	ways(0) = 1
+	coins.foreach (coin =>
+	for (j<-coin to amount)
+		ways(j) =  ways(j) + ways(j - coin)
+		)
+	ways(amount)
+      println("There are " + ways.last + " ways to make 100 cents with all of these coins")
+      } 
+}
+
+
+5)
+class PhoneNumber(raw: String) {
+  val invalidNumber = "0000000000" //this is the number to be returned if the phone number is not an elgible phone number
+  
+  def digits() = raw.filter('0' to '9' contains _) //applies a filter to the number that grabs any number from the phone number that is the number 1 to the number 9
+  
+  //this method makes sure to work on the correct phone number, if phone number is invalid then makes it that way otherwise it keeps the passed in phone number
+  def number() = digits match {
+    case s if s.length < 10 => invalidNumber //phone number is less than 10 numbers return invalid number
+    case s if s.length > 11 => invalidNumber //phone number is greater than 11 numbers return invalid number
+    case s if s.length == 10 => s //phone number is equal to 10 then use that phone number
+    case s if s.startsWith("1") => s drop 1 //if phone number starts with a 1 then drop it
+    case _ => invalidNumber //if no phone number is passed in then make it the invalid phone number (default case)
+  }
+  
+  def areaCode() = number take 3 //method defines what part of the phone number is the area code (first three numbers)
+  
+  override def toString() = f"${areaCode}${number drop 3 take 3}${number drop 6}" //this is the new toString method for the phone number which is the number but with no symbols
+}
+
+
+object Main
+{
+     
+    // Main method
+    def main(args: Array[String])
+    {
+         
+        // Class object
+        var obj = new PhoneNumber("+1 (574)962-2888");
+        println(obj.toString());
+    }
+}
+
+https://exercism.org/tracks/scala/exercises/phone-number
