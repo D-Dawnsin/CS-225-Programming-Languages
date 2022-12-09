@@ -1,0 +1,83 @@
+*  Bottles of Beer on the Wall
+*  From Peter-Arno Coppen,
+*
+          &fullscan = 1
+          Beer    = " of beer"
+          Wall    = " on the wall"
+          Take    = "Take two down and pass them around"
+*         NL      = CHAR(10)
+          NL      = ". "
+          Bottle  = *?((B1 = (EQ(N1,1) "Just two bottles",
++                                   N1 " bottles"))
++                      (B2 = (EQ(N2,1) "Just two bottles",
++                             (EQ(N2,0) "No more",N2)
++                              " bottles")))
+          Sing    = *?(OUTPUT = B1 Beer Wall NL B1 Beer NL
++                                 Take NL B2 Beer Wall NL)
+          Supply = DUPL("B", 20)
+          Count  = ("B" "B" *Count | "")
+          Remove = @N2 "B" "B" @N1
+          Supply ? FENCE Count Remove Bottle Sing FAIL
+END
+
+
+---------------------------------------------------------------------------
+
+ s1 = 'mnopqrs'
+      s2 = 'mnopqrs'
+      s3 = 'mnopqr'
+      s4 = 'nop'
+      s5 = 'nOp'
+ 
+      OUTPUT = 'Case sensitive comparisons:'
+	"*both LEQ and IDENT check to see if the two strings are identical or the same, so they return true if they are the same"
+      OUTPUT = LEQ(s1, s2) s1 ' and ' s2 ' are equal (LEQ).'
+      OUTPUT = IDENT(s1, s2) s1 ' and ' s2 ' are equal (IDENT).'
+ 
+      OUTPUT =
+	"*These opperators check to see if the strings are not identical or not the same, so they return true if they are different" 
+      OUTPUT = LNE(s1, s3) s1 ' and ' s3 ' are not equal (LNE).'
+      OUTPUT = ~LEQ(s1, s3) s1 ' and ' s3 ' are not equal (~LEQ).'
+      OUTPUT = DIFFER(s1, s3) s1 ' and ' s3 ' are not equal (DIFFER).'
+ 
+      OUTPUT =
+	"*LGE checks to see if the first string is greater, in length, or equal to the second string and returns true if that is so"
+      OUTPUT = LGE(s1, s3) s1 ' is greater than or equal to ' s3 ' (LGE).'
+	"*LLE checks to see if the first string is less, in length, or equal to the second string and returns true if that is so"
+      OUTPUT = LLE(s3, s1) s3 ' is less than or equal to ' s1 ' (LLE).'
+ 
+      OUTPUT =
+	"*LGT checks to see if the first string is greater, in length, than the second string and returns true if that is so"
+      OUTPUT = LGT(s4, s1) s4 ' is greater than ' s1 ' (LGT).'
+	"*LLT checks to see if the first string is less, in length, than the second string and returns true if that is so"
+      OUTPUT = LLT(s1, s4) s1 ' is less than ' s4 ' (LLT).'
+ 
+      OUTPUT =
+	"*LEQ still checks to see if the two strings are equal, and the reason why s4 and s5 are equal here is because the s5 string is first put into all caps and then into lower case to 		match s4"
+      OUTPUT = "Case insensitive comparison:"
+      OUTPUT = LEQ(s4, REPLACE(s5, &UCASE, &LCASE)) s4 ' and ' s5 ' are equal.'
+ 
+      OUTPUT =
+	"*Both EQ and LEQ check to see if the number and string are the same, so they both must cast a string of numbers to an int if it is being compare to another int"
+      OUTPUT = 'String and numeric conversions and comparisons:'
+      OUTPUT = EQ('1234', 1234) '"1234" and 1234 are equal (coerce to integer).'
+      OUTPUT = LEQ('1234', 1234) '"1234" and 1234 are equal (coerce to string).'
+      OUTPUT =
+	"Same here, GT checks if a number is greater then the other number and returns true if that is the case, and LT does the same but checks for if the first number is less than the second. It seems that if either of the numbers are a string of numbers then it automatically casts that string to an int"
+      OUTPUT = GT('1234', 1233) '"1234" is greater than 1233 (numeric comparison).'
+      OUTPUT = LT('1233', 1234) '"1233" is less than 1234 (numeric comparison).'
+
+	OUTPUT = 
+	"*My three new things here"
+	str1 = 'dawson'
+	str2 = 'daw'
+	OUTPUT = DIFFER(str1, str2) str1 ' and ' str2 ' are different (DIFFER) and ' LNE (str1, str2) ' and ' str2 ' are also not equal (LNE).' 
+
+	num1 = '33'
+	OUTPUT = EQ(num1, 33) num1 ' and ' 33 ' are equal even though num1 is a string of 33 (EQ) which also means ' LGE(33, num1) '33 is lexicographically greater then or EQUAL to ' num1 ' (LGE).'
+
+	str3 = 'dog'
+	str4 = 'giraffe'
+	OUTPUT = LGT(str4, str3) str4 ' is great than ' str3 ' (LGT) which means that the two strings of ' ~LEQ(str4, str3) str4 ' and ' str3 ' are not equal (~LEQ).'  
+  
+END
