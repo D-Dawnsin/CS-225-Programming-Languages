@@ -1,0 +1,36 @@
+Choices for code:
+
+CS1: ISBN marker
+
+I picked this assignment because it was the one I did for the rust assignment. Furthermore, I figgured that grabbing
+user input would again be simple enough, Finally once I had that all I would need to do is compute some math to append
+a marker onto the user's ISBN.
+
+This was actually much simpler in Go. The best part about Go in the sense of this code was how simple it was to 
+take the user's input. Then on top of it all it was easy to assign variables correctly and simply to different arrays.
+Another nice thing is that Go only ha for loops (no while loops) and this made navigating everything simple. 
+
+
+CS0: Rolling two dice
+
+I picked this assignment because it was the one I did for the rust assignment. Moreover, nothing could be more simple
+than randomly generating two dice rolls and then adding them together. I also wanted to see how importing libraries
+in Go worked.
+
+This code was extremely easy in Go, especially in comparison to rust. Instead of starting a whole seperate project
+and making sure everyhting was imported and lined up perfeclty all i had to do was simply add two new imports. This
+required two lines of code. One of the imports generated the random number and the other one was used to make a 
+random seed in order to generte different random numbers each time the code was ran. Overall, this code was extremely
+friendly. 
+
+
+CS0: Rock, Paper, Scissors
+
+I picked this assignment because it was the one I did for the rust assignment. Again, I had confidence in my ability
+to recieve user input and base logic around that. Moreover, coding always seems easier when it is on something that
+you are enjoying, and creating a little rock, paper, scissors game, or any game really, is always entertaining.
+
+In Go, this code was easy and in fact easier than in rust just because of how simple it is to recieve user input. 
+The only downside I found was that either my brain was just not understanding things correctly (which is very possible)
+but I had a weird trip up with the logic of my if..else statements. However, this was only a slight trip up and putting 
+the correct logic behind a 5 round rock, paper, scissor game was simple enough. 
